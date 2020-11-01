@@ -3,6 +3,7 @@ package model;
 public class Node {
     private int row;
     private int col;
+    private String mirror;
 
     private Node next;
     private Node prev;
