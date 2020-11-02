@@ -3,7 +3,6 @@ package model;
 public class Node {
     private int row;
     private int col;
-    private String mirror;
 
     private Node next;
     private Node prev;
@@ -59,7 +58,16 @@ public class Node {
         down = d;
     }
 
+
+
     public String toString() {
-        return "[("+row+","+col+")]";
+
+
+        return "[ ]";
+
+
+
+
+
     }
 }

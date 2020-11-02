@@ -9,7 +9,8 @@ public class Main {
         System.out.println(lm);
         char l = (int)'A';
         int num = (l+1)-l;
-        System.out.println("el numero de A es: " + num);
+        //System.out.println("el numero de A es: " + num);
+
     }
 
 }
