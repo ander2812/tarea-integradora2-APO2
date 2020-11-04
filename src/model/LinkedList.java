@@ -1,8 +1,11 @@
 package model;
 
+import java.util.Random;
+
 public class LinkedList {
     private Node first;
     private int numRows;
+    Random random = new Random();
     private int numCols;
 
     public LinkedList(int m, int n) {
@@ -12,14 +15,11 @@ public class LinkedList {
     }
 
     private void createMatrix() {
-        //System.out.println("vamos a crear la matriz");
         first = new Node(0,0);
-        //System.out.println("se crea el first");
         createRow(0,0,first);
     }
 
     private void createRow(int i, int j, Node currentFirstRow) {
-       // System.out.println("en createRow con la fila "+i);
         createCol(i,j+1,currentFirstRow,currentFirstRow.getUp());
         if(i+1<numRows) {
             Node downFirstRow = new Node(i+1,j);
@@ -31,7 +31,6 @@ public class LinkedList {
 
     private void createCol(int i, int j, Node prev, Node rowPrev) {
         if(j<numCols) {
-           // System.out.println("   en createCol con la columna "+j);
             Node current = new Node(i, j);
             current.setPrev(prev);
             prev.setNext(current);
@@ -46,10 +45,31 @@ public class LinkedList {
         }
     }
 
+    public void addMirrors(Node current, Node nextRowFirstColumn, int mirrors) {
+        if (mirrors > 0) {
+            int totalMirrorsAvailable = mirrors;
+            if (hasMirror() && current.getMirror().equals("")) {
+                totalMirrorsAvailable = mirrors - 1;
+                current.addMirror(mirrorType());
+            }
+            if (current.getNext() != null) {
+                addMirrors(current.getNext(), nextRowFirstColumn, totalMirrorsAvailable);
+            } else if (current.getDown() != null) {
+                addMirrors(nextRowFirstColumn, nextRowFirstColumn.getDown(), totalMirrorsAvailable);
+            } else {
+                addMirrors(first, first.getDown(), totalMirrorsAvailable);
+            }
+        }
+    }
+
     public String toString() {
         String msg;
         msg = toStringRow(first);
         return msg;
+    }
+
+    public boolean hasMirror() {
+        return random.nextInt(((numColumn * numRows) / 2)) == 0;
     }
 
     private String toStringRow(Node firstRow) {

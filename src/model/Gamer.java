@@ -3,6 +3,13 @@ package model;
 public class Gamer {
     private Gamer left;
     private Gamer right;
+    private String fullName;
+    private int score;
+
+    public Gamer(String fullName, int score) {
+        this.fullName = fullName;
+        this.score = score;
+    }
 
     public Gamer getLeft() {
         return left;
@@ -20,12 +27,6 @@ public class Gamer {
         this.right = right;
     }
 
-    private String fullName;
-    private int score;
-    public Gamer(String fullName, int score) {
-        this.fullName = fullName;
-        this.score = score;
-    }
 
     public String getFullName() {
         return fullName;

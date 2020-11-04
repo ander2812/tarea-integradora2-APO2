@@ -8,27 +8,40 @@ public class Score {
         root = null;
     }
 
-    public void addGamer(int score, String name) throws Exception{
-        Gamer gamer = new Gamer(name, score);
+    public Gamer getRoot() {
+        return root;
+    }
+
+    public void setRoot(Gamer root) {
+        this.root = root;
+    }
+
+    public void addGamer(int score, String name){
+        Gamer newGamer = new Gamer(name, score);
+        if (root==null){
+            root = newGamer;
+        }else{
+            addGamer(root,newGamer);
+
+        }
+
 
 
     }
 
-    private Gamer insertGamer(Gamer temp, int score, String name) throws Exception{
-
-        if (temp == null){
-            temp = new Gamer(name, score);
-        }else if (score < temp.getScore()){
-            Gamer left = insertGamer(temp.getLeft(), score, name);
-            temp.setLeft(left);
-        }else if (score > temp.getScore()){
-            Gamer right = insertGamer(temp.getRight(), score, name);
-            temp.setRight(right);
+    private void addGamer(Gamer currentGamer,Gamer newGamer){
+        if (newGamer.getScore() < currentGamer.getScore() && currentGamer.getLeft() == null){
+            currentGamer.setLeft(newGamer);
+        }else if (newGamer.getScore() > currentGamer.getScore() && currentGamer.getRight() == null){
+            currentGamer.setRight(newGamer);
         }else{
-            throw new Exception("Duplicate Gamer");
-        }
+            if (newGamer.getScore()<currentGamer.getScore() & currentGamer.getLeft()!=null){
+                addGamer(currentGamer.getLeft(),newGamer);
 
-        return temp;
+            }else{
+                addGamer(currentGamer.getRight(),newGamer);
+            }
+        }
 
 
 
