@@ -3,11 +3,30 @@ package model;
 public class Node {
     private int row;
     private int col;
+    private String charNode = " ";
+    private String shoot = "";
 
     private Node next;
     private Node prev;
     private Node up;
     private Node down;
+    private String mirror = "";
+
+    public String getCharNode() {
+        return charNode;
+    }
+
+    public void setCharNode(String charNode) {
+        this.charNode = charNode;
+    }
+
+    public String getMirror() {
+        return mirror;
+    }
+
+    public void setMirror(String mirror) {
+        this.mirror = mirror;
+    }
 
     public Node(int r, int c) {
         row = r;
@@ -30,6 +49,10 @@ public class Node {
         return next;
     }
 
+    public String getPosition() {
+        return ""+(getRow()+1)+getNameCol()+"";
+    }
+
     public Node getPrev() {
         return prev;
     }
@@ -46,6 +69,11 @@ public class Node {
         prev = p;
     }
 
+    public void addMirror(String mirrorType){
+        mirror = mirrorType;
+
+    }
+
     public void setNext(Node n) {
         next = n;
     }
@@ -58,16 +86,11 @@ public class Node {
         down = d;
     }
 
-
-
     public String toString() {
+        return "["+charNode+shoot+"]";
+    }
 
-
-        return "[ ]";
-
-
-
-
-
+    public String toStringTest() {
+        return "["+(getRow()+1)+getNameCol()+"]";
     }
 }

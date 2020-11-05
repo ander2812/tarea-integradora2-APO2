@@ -4,7 +4,7 @@ import model.Gamer;
 import java.util.Scanner;
 
 public class Menu {
-    private LinkedList lm;
+     LinkedList lm;
     private Gamer gamer;
     Scanner sc = new Scanner(System.in);
     public Menu() {
@@ -40,8 +40,25 @@ public class Menu {
         int n = Integer.parseInt(array[1]);
         int m = Integer.parseInt(array[2]);
         int k = Integer.parseInt(array[3]);
-        lm = new LinkedList(n,m);
-        System.out.println(lm);
+        lm = new LinkedList(n,m,k);
+        System.out.println(lm.toString());
+        subMenu();
+
+    }
+
+    public void subMenu(){
+        System.out.println("please enter \n (1) show to laser \n (2) guess mirror");
+        int option = Integer.parseInt(sc.nextLine());
+        switch (option){
+            case 1:
+                System.out.println("please enter the column identification and row identification");
+                String id = sc.nextLine();
+                lm.shootLaserId(id);
+                System.out.println(lm.toString());
+                break;
+            case 2:
+                break;
+        }
 
     }
 }
