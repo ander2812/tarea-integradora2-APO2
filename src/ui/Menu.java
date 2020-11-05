@@ -1,15 +1,15 @@
 package ui;
 import model.LinkedList;
-import model.Gamer;
+import model.Score;
 import java.util.Scanner;
 
 public class Menu {
      LinkedList lm;
-    private Gamer gamer;
+     Score score;
     Scanner sc = new Scanner(System.in);
+    private String name = " ";
     public Menu() {
         pMenu();
-        gamer = new Gamer("",0);
     }
     public void pMenu(){
         System.out.println("Please enter a option \n\n(1) play game \n(2) see board \n(3) exit");
@@ -36,7 +36,7 @@ public class Menu {
     public void option1(){
         System.out.println("please enter the nick name, the brown number, column number and mirror number after one space\n");
         String[] array = sc.nextLine().split(" ");
-        String name = array[0];
+        name = array[0];
         int n = Integer.parseInt(array[1]);
         int m = Integer.parseInt(array[2]);
         int k = Integer.parseInt(array[3]);
@@ -47,7 +47,7 @@ public class Menu {
     }
 
     public void subMenu(){
-        System.out.println("please enter \n (1) show to laser \n (2) guess mirror");
+        System.out.println("please enter \n (1) show to laser \n (2) guess mirror \n (3) exit");
         int option = Integer.parseInt(sc.nextLine());
         switch (option){
             case 1:
@@ -55,8 +55,23 @@ public class Menu {
                 String id = sc.nextLine();
                 lm.shootLaserId(id);
                 System.out.println(lm.toString());
+                subMenu();
                 break;
+
             case 2:
+
+                System.out.println("please enter the column identification and row identification");
+                id = sc.nextLine();
+                lm.selectNode(id);
+                System.out.println(lm.toString());
+                if (lm.getWinnerAnswer() ==  lm.getMirrors()) {
+                    System.out.println("congratulation");
+                }
+                score.addGamer(lm.getWinnerAnswer(), name);
+                subMenu();
+                break;
+            case 3:
+                pMenu();
                 break;
         }
 

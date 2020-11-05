@@ -89,8 +89,4 @@ public class Node {
     public String toString() {
         return "["+charNode+shoot+"]";
     }
-
-    public String toStringTest() {
-        return "["+(getRow()+1)+getNameCol()+"]";
-    }
 }

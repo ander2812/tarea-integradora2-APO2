@@ -17,8 +17,6 @@ public class Main {
 
     public static void main(String[] args) {
         new Main();
-        //LinkedList lm = new LinkedList(3, 4);
-        //System.out.println(lm);
 
 
     }

@@ -21,6 +21,10 @@ public class LinkedList {
     private int numCols;
     private int mirrors;
 
+    public int getWinnerAnswer() {
+        return winnerAnswer;
+    }
+
     public LinkedList(int m, int n, int mirrors) {
         numRows = m;
         numCols = n;
@@ -113,9 +117,9 @@ public class LinkedList {
             sNode = null;
         }
     }
-    public void selectNode(String action) {
-        String idRow = action.substring(0, 1);
-        String idColumn = action.substring(1, 2);
+    public void selectNode(String id) {
+        String idRow = id.substring(0, 1);
+        String idColumn = id.substring(1, 2);
         contentNodes(first, first.getDown(), idRow + idColumn);
         if (currentNode !=null) {
             if (currentNode.getCharNode().equals(INCORRECT)) {
@@ -128,9 +132,6 @@ public class LinkedList {
         } else {
             winnerAnswer ++;
             sNode.setCharNode(sNode.getMirror());
-            //if (winnerAnswer ==  this.mirrors) {
-                //win();
-            //}
         }
     }
 
