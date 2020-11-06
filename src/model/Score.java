@@ -47,4 +47,39 @@ public class Score {
 
     }
 
+    public String printGamer(Gamer root) throws NullPointerException{
+        String gamer = " ";
+        try {
+            gamer += root.getScore()+ " ";
+            if (root.getLeft()!= null){
+                gamer += printGamer(root.getLeft());
+            }else if(root.getLeft() == null){
+                gamer += printGamer(root.getRight());
+            }else if(root.getRight() == null){
+                gamer += printGamer(root.getLeft());
+            }
+
+        } catch (Exception Ignored) {
+        }
+
+
+        return gamer;
+    }
+
+    public String toString(){
+        String msg = " ";
+        try {
+            if (root == null){
+                msg += "no players added";
+            }else{
+                msg = printGamer(root);
+            }
+
+        } catch (Exception Ignored) {
+        }
+
+
+        return msg;
+    }
+
 }

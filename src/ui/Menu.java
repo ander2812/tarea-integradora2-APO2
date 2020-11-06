@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Menu {
      LinkedList lm;
-     Score score;
+     Score score = new Score();
     Scanner sc = new Scanner(System.in);
     private String name = " ";
     public Menu() {
@@ -24,7 +24,8 @@ public class Menu {
 
                 break;
             case 2:
-                System.out.println(lm);
+                System.out.println(score.toString());
+                System.out.println(" ");
                 pMenu();
                 break;
             case 3:
@@ -46,7 +47,7 @@ public class Menu {
 
     }
 
-    public void subMenu(){
+    public void subMenu() throws NullPointerException{
         System.out.println("please enter \n (1) show to laser \n (2) guess mirror \n (3) exit");
         int option = Integer.parseInt(sc.nextLine());
         switch (option){
@@ -64,13 +65,20 @@ public class Menu {
                 id = sc.nextLine();
                 lm.selectNode(id);
                 System.out.println(lm.toString());
+                System.out.println(lm.getWinnerAnswer());
+                System.out.println(name);
                 if (lm.getWinnerAnswer() ==  lm.getMirrors()) {
                     System.out.println("congratulation");
+                    System.out.println(" ");
                 }
-                score.addGamer(lm.getWinnerAnswer(), name);
+
                 subMenu();
                 break;
             case 3:
+                try {
+                    score.addGamer(lm.getWinnerAnswer(), name);
+                } catch (Exception Ignored) {
+                }
                 pMenu();
                 break;
         }

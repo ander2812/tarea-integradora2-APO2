@@ -7,8 +7,8 @@ public class LinkedList {
     private Node sNode;
     private Node laser;
     private Node currentNode;
-    private int numRows;
-    private int winnerAnswer;
+    private final int numRows;
+    private int winnerAnswer = 0;
     private String columns = " ";
     Random random = new Random();
     private final String L_MIRROR = "\\";
@@ -18,7 +18,7 @@ public class LinkedList {
     private final String VERTICAL = "V";
     private final String END = "E";
     private final String INCORRECT = "X";
-    private int numCols;
+    private final int numCols;
     private int mirrors;
 
     public int getWinnerAnswer() {
@@ -117,15 +117,21 @@ public class LinkedList {
             sNode = null;
         }
     }
-    public void selectNode(String id) {
-        String idRow = id.substring(0, 1);
-        String idColumn = id.substring(1, 2);
-        contentNodes(first, first.getDown(), idRow + idColumn);
-        if (currentNode !=null) {
-            if (currentNode.getCharNode().equals(INCORRECT)) {
-                currentNode.setCharNode(" ");
+    public void selectNode(String id) throws NumberFormatException {
+        try {
+            String idRow = id.substring(0, 1);
+            String idColumn = id.substring(1, 2);
+            contentNodes(first, first.getDown(), idRow + idColumn);
+            if (currentNode !=null) {
+                if (currentNode.getCharNode().equals(INCORRECT)) {
+                    currentNode.setCharNode(" ");
+                }
             }
+
+        } catch (Exception ignored) {
         }
+
+
         currentNode = sNode;
         if (sNode.getMirror().equals("")) {
             sNode.setCharNode(INCORRECT);
@@ -274,6 +280,7 @@ public class LinkedList {
     public String toString() {
         String msg;
         msg = toStringRow(first);
+        columns = " " + " ";
         cols(first.getCol());
         return columns + msg;
 
